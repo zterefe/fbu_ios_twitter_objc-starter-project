@@ -96,6 +96,17 @@ static NSString * const consumerSecret =@ "camceSHbgAbk3eI096OFBrGta1uQDGXtxJ5li
         completion(nil, error);
     }];
 }
+- (void) unfavorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
+    
+    NSString *urlString = @"1.1/favorites/destroy.json";
+    NSDictionary *parameters = @{@"id": tweet.idStr};
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
 -(void) retweet:(Tweet *) tweet completion:(void (^)(Tweet *, NSError *)) completion{
 
     NSString *urlstring=[[@"1.1/statuses/retweet/" stringByAppendingString:tweet.idStr] stringByAppendingString:@".json"];
@@ -106,10 +117,17 @@ static NSString * const consumerSecret =@ "camceSHbgAbk3eI096OFBrGta1uQDGXtxJ5li
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         completion(nil, error);
     }];
-
-
-
 }
-
+-(void) unretweet:(Tweet *) tweet completion:(void (^)(Tweet *, NSError *)) completion{
+    
+    NSString *urlstring=[[@"1.1/statuses/unretweet/" stringByAppendingString:tweet.idStr] stringByAppendingString:@".json"];
+    NSDictionary *parameters=@{@"id":tweet.idStr};
+    [self POST:urlstring parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
 
 @end

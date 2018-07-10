@@ -40,12 +40,12 @@
         NSString *createdAtOriginalString = dictionary[@"created_at"];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
      formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
-        NSDate *date = [formatter dateFromString:createdAtOriginalString];
-   
+        self.date = [formatter dateFromString:createdAtOriginalString];
+      
         formatter.dateStyle = NSDateFormatterShortStyle;
         formatter.timeStyle = NSDateFormatterNoStyle;
         // Convert Date to String
-        self.createdAtString = [formatter stringFromDate:date];
+        self.createdAtString = [formatter stringFromDate:self.date];
         }
         
         

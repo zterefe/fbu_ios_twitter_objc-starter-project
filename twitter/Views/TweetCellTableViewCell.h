@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imagefield;
 @property (weak, nonatomic) IBOutlet UIButton *likebutton;
 @property (weak, nonatomic) IBOutlet UIButton *tweetbutton;
+@property (weak, nonatomic) IBOutlet UILabel *datelabel;
 
 @property int count;
 -(void)setTweet:(Tweet *)tweet;
